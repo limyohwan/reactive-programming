@@ -31,4 +31,12 @@
     - 4 다음으로 Publisher는 Subscriber로부터 요청받은 만큼의 데이터를 통지함(onNext)
     - 5 Publisher와 Subscriber 간에 데이터 통지, 데이터 수신, 데이터 요청의 과정을 반복하다가 Publisher가 모든 데이터를 통지하게 되면 마지막으로 데이터 전송이 완료되었음을 Subscriber에게 알림(onComplete)
     - 5-1 Publisher가 데이터를 처리하는 과정에서 에러가 발생하면 에러가 발생했음을 Subscriber에게 알림(onError)
+  - 리액트 스트림즈 컴포넌트의 인터페이스 코드는 Publisher가 subscribe 메서드를 통해 Susbscriber를 구독하게 되어있는데 이는 Kafka의 Pub/Sub 개념과 조금 다르다. Kafka는 중간에 메시지 브로커를 통해 토픽이라는 것이 존재하고 Publisher와 Subscriber가 해당 토픽을 바라보며 느슨한 결합이 되어있다. 리액트 스트림즈 또한 개념상으로는 Subscriber가 구독하는 것이 맞는데 실제 코드는 위와 같이 된다.
+  - Signal: Publisher와 Subscriber간에 주고받는 상호작용(onSubscribe, onNext, onComplete, onError, request, cancel)
+  - Demand: Subscriber가 Publisher에게 요청하는 데이터, Subscriber가 요청한 아직 전송되지 않은 데이터
+  - Emit: Publisher가 Subscriber에 데이터를 전달하는 것(통지, 발행, 게시, 방출)
+  - Upstream/Downstream: 데이터 흐름에서 상위에 있냐 하위에 있냐에 따라 상대적으로 달라짐
+  - Sequence: Publisher가 emit하는 데이터의 연속적인 흐름을 정의해 놓는 것, Operator 체인 형태로 정의
+  - Operator: just, filter, map 같은 메서드
+  - Source, Original: 최초의 생성된 무언가(Data Source, Source Publisher, Source Flux)
   
