@@ -39,4 +39,19 @@
   - Sequence: Publisher가 emit하는 데이터의 연속적인 흐름을 정의해 놓는 것, Operator 체인 형태로 정의
   - Operator: just, filter, map 같은 메서드
   - Source, Original: 최초의 생성된 무언가(Data Source, Source Publisher, Source Flux)
-  
+
+## Blocking I/O와 Non-Blocking I/O
+- Blocking I/O
+  - 요청 스레드가 차단되어 작업 스레드가 처리를 끝내고 응답을 반환하기 전까지 대기함
+  - 하나의 스레드가 I/O에 의해서 차단되어 대기하는 것
+  - 멀티 스레딩 기법을 사용하여 보완할 수 있지만 컨텍스트 스위칭으로 인한 스레드 전환 비용이 발생됨
+  - 과다한 메모리 사용으로 오버헤드가 발생할 수 있음
+  - 스레드 풀에서 응답 지연이 발생할 수 있음
+  - Spring MVC
+- Non-Blocking I/O
+  - 작업 스레드의 종료 여부와 관계없이 요청한 스레드는 차단되지 않음
+  - Blocking I/O 방식보다 더 적은 스레드를 사용하기 때문에 멀티스레딩 기법을 사용할 때 발생한 문제점들이 생기지 않음
+  - CPU 대기 시간 및 사용량에 있어서 효율적임
+  - CPU를 많이 사용하는 작업이 포함된 경우에는 성능에 악영향을 줌
+  - 사용자의 요청에서 응답까지의 전체 과정에서 Blocking I/O 요소가 포함된 경우에 이점을 발휘하기 힘듬
+  - Spring Webflux
